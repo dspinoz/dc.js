@@ -1,43 +1,34 @@
 /**
- * Margin is a mixin that provides margin utility functions for both the Row Chart and Coordinate Grid
- * Charts.
- * @name marginMixin
+ * Hierarchy is a mixin that provides margin utility functions for charts that operate on hierarchial data structures.
+ * @name hierarcyMixin
  * @memberof dc
  * @mixin
  * @param {Object} _chart
- * @returns {dc.marginMixin}
+ * @returns {dc.hierarchyMixin}
  */
-dc.marginMixin = function (_chart) {
-    var _margin = {top: 10, right: 50, bottom: 30, left: 30};
+dc.hierarchyMixin = function (_chart) {
+    var _nest = d3.nest();
 
     /**
-     * Get or set the margins for a particular coordinate grid chart instance. The margins is stored as
-     * an associative Javascript array.
-     * @method margins
-     * @memberof dc.marginMixin
+     * Get or set the nest function used for building hierarchial data structures
+     * @method nest
+     * @memberof dc.hierarchyMixin
      * @instance
      * @example
-     * var leftMargin = chart.margins().left; // 30 by default
-     * chart.margins().left = 50;
-     * leftMargin = chart.margins().left; // now 50
-     * @param {{top: Number, right: Number, left: Number, bottom: Number}} [margins={top: 10, right: 50, bottom: 30, left: 30}]
-     * @returns {{top: Number, right: Number, left: Number, bottom: Number}|dc.marginMixin}
+     * chart.nest()
+     *  .key(function(d) { return d.key; }) // first level
+     *  .key(function(d) { return d.category; }) // second level
+     *  .key(function(d) { return d.subcategory; }); // third level
+     * @param nest function, default d3.nest
+     * @returns generator of hierarchy from flat array
      */
-    _chart.margins = function (margins) {
+    _chart.nest = function (nest) {
         if (!arguments.length) {
-            return _margin;
+            return _nest;
         }
-        _margin = margins;
+        _nest = nest;
         return _chart;
     };
-
-    _chart.effectiveWidth = function () {
-        return _chart.width() - _chart.margins().left - _chart.margins().right;
-    };
-
-    _chart.effectiveHeight = function () {
-        return _chart.height() - _chart.margins().top - _chart.margins().bottom;
-    };
-
+    
     return _chart;
 };
