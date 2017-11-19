@@ -19,8 +19,8 @@ dc.hierarchyMixin = function (_chart) {
      *  .key(function(d) { return d.key; }) // first level
      *  .key(function(d) { return d.category; }) // second level
      *  .key(function(d) { return d.subcategory; }); // third level
-     * @param nest function, default d3.nest
-     * @returns generator of hierarchy from flat array
+     * @param {d3.nest}, default d3.nest
+     * @returns {d3.nest} generator of hierarchy from flat array
      */
     _chart.nest = function (nest) {
         if (!arguments.length) {

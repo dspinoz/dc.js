@@ -460,6 +460,7 @@ module.exports.jsFiles = [
     'src/filters.js',
     'src/base-mixin.js',
     'src/margin-mixin.js',
+    'src/hierarchy-mixin.js',
     'src/color-mixin.js',
     'src/coordinate-grid-mixin.js',
     'src/stack-mixin.js',
